@@ -34,10 +34,6 @@ passport.use(
             .then(newUser => done(null, newUser));
         }
       });
-
-      console.log('accessToken', accessToken);
-      console.log('refreshToken', refreshToken);
-      console.log('profile', profile);
     }
   )
 );

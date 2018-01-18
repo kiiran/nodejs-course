@@ -24,10 +24,12 @@ class Header extends Component {
 
   render() {
     console.log('header props', this.props);
+    const { auth } = this.props;
+
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to="/" className="brand-logo">
+          <Link to={auth ? '/surveys' : '/'} className="brand-logo">
             Emaily
           </Link>
           <ul id="nav-mobile" className="right">

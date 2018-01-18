@@ -28,6 +28,17 @@ app.use(passport.session());
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
 
-const PORT = process.env.PORT || 5000;
+if (process.env.NODE_ENV === 'production') {
+  // If a request comes in and a route hasn't been set up for it,
+  // try looking for assets in here
+  app.use(express.static('client/build'));
 
+  // If that fails, just show index.html
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT);

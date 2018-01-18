@@ -28,6 +28,7 @@ app.use(passport.session());
 // as a named const and then calling the function like authRoutes(app)
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // If a request comes in and a route hasn't been set up for it,

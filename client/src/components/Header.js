@@ -5,7 +5,8 @@ import Stripe from './Stripe';
 
 class Header extends Component {
   renderLinks() {
-    switch (this.props.auth) {
+    const { auth } = this.props;
+    switch (auth) {
       case null:
         return <li>Spinner...</li>;
       case false:
@@ -20,6 +21,7 @@ class Header extends Component {
             <li>
               <Stripe />
             </li>
+            <li style={{ margin: '0 10px' }}>Credits: {auth.credits}</li>
             <li>
               <a href="/api/logout">Log out</a>
             </li>

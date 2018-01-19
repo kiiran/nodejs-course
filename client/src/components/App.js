@@ -13,8 +13,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('props', this.props);
-    console.log('state', this.state);
     return (
       <BrowserRouter>
         <Fragment>

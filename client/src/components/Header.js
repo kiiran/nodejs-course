@@ -31,7 +31,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log('header props', this.props);
     const { auth } = this.props;
 
     return (

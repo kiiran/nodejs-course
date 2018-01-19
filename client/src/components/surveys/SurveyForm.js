@@ -1,39 +1,33 @@
 import _ from 'lodash';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import SurveyField from './SurveyField';
+import formFields from './formFields';
 import validateEmails from '../../utils/validateEmails';
-
-const FIELDS = [
-  { label: 'Survey Title', name: 'title' },
-  { label: 'Subject Line', name: 'subject' },
-  { label: 'Message Content', name: 'body' },
-  { label: 'Recipients', name: 'recipients' }
-];
 
 class SurveyForm extends Component {
   renderFields() {
-    return _.map(FIELDS, ({ label, name }) => (
+    return _.map(formFields, ({ label, name }) => (
       <Field key={name} type="text" label={label} name={name} component={SurveyField} />
     ));
   }
 
   render() {
-    return (
-      <Fragment>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-          {this.renderFields()}
+    const { handleSubmit, onSurveySubmit } = this.props;
 
-          <Link to="/surveys" className="red btn-flat white-text">
-            Cancel
-          </Link>
-          <button type="submit" className="teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">arrow_forward</i>
-          </button>
-        </form>
-      </Fragment>
+    return (
+      <form onSubmit={handleSubmit(onSurveySubmit)}>
+        {this.renderFields()}
+
+        <Link to="/surveys" className="red btn-flat white-text">
+          Cancel
+        </Link>
+        <button type="submit" className="teal btn-flat right white-text">
+          Next
+          <i className="material-icons right">arrow_forward</i>
+        </button>
+      </form>
     );
   }
 }
@@ -71,6 +65,7 @@ function validate({ title, subject, body, recipients }) {
 export default reduxForm({
   validate,
   form: 'surveyForm',
+  destroyOnUnmount: false,
   // I found the validation while typing annoying. Setting touchOnBlur to false solves that
   touchOnBlur: false
 })(SurveyForm);

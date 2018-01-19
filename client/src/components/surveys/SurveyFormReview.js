@@ -19,7 +19,10 @@ const SurveyFormReview = ({ onBackClick, values, submitSurvey }) => {
       <button className="red white-text btn-flat" onClick={onBackClick}>
         Back
       </button>
-      <button className="teal white-text btn-flat right" onClick={submitSurvey}>
+      <button
+        className="teal white-text btn-flat right"
+        onClick={() => submitSurvey(values)}
+      >
         Send Survey
         <i className="material-icons right">check</i>
       </button>
